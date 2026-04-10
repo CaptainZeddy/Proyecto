@@ -1,44 +1,47 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class FirstPersonMovement : MonoBehaviour
 {
-    public float speed = 5;
+    public float speed = 2f;
 
     [Header("Running")]
     public bool canRun = true;
     public bool IsRunning { get; private set; }
-    public float runSpeed = 9;
+    public float runSpeed = 3f;
     public KeyCode runningKey = KeyCode.LeftShift;
 
-    Rigidbody rigidbody;
-    /// <summary> Functions to override movement speed. Will use the last added override. </summary>
+    [HideInInspector] public Rigidbody rigidbody;
     public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
-
-
 
     void Awake()
     {
-        // Get the rigidbody on this.
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.freezeRotation = true; // Evita que el cuerpo rote al moverse
     }
 
     void FixedUpdate()
     {
-        // Update IsRunning from input.
+        // Actualiza si se corre
         IsRunning = canRun && Input.GetKey(runningKey);
 
-        // Get targetMovingSpeed.
+        // Velocidad objetivo
         float targetMovingSpeed = IsRunning ? runSpeed : speed;
         if (speedOverrides.Count > 0)
-        {
             targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
-        }
 
-        // Get targetVelocity from input.
-        Vector2 targetVelocity =new Vector2( Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
+        // Input de movimiento
+        Vector2 targetVelocity = new Vector2(
+            Input.GetAxis("Horizontal") * targetMovingSpeed,
+            Input.GetAxis("Vertical") * targetMovingSpeed
+        );
 
-        // Apply movement.
-        rigidbody.linearVelocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.linearVelocity.y, targetVelocity.y);
+        // Aplicar movimiento al Rigidbody
+        Vector3 move = transform.rotation * new Vector3(targetVelocity.x, rigidbody.linearVelocity.y, targetVelocity.y);
+        rigidbody.linearVelocity = move;
     }
+
+    // Propiedad pública para Head Bob
+    public Vector3 Velocity => rigidbody.linearVelocity;
 }
