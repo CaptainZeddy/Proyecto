@@ -6,6 +6,10 @@ public class FirstPersonMovement : MonoBehaviour
 {
     public float speed = 2f;
 
+    [Header("Gravity")]
+    [Tooltip("Multiplicador que ajusta la gravedad aplicada al Rigidbody.")]
+    public float gravityMultiplier = 1f;
+
     [Header("Running")]
     public bool canRun = true;
     public bool IsRunning { get; private set; }
@@ -37,8 +41,11 @@ public class FirstPersonMovement : MonoBehaviour
             Input.GetAxis("Vertical") * targetMovingSpeed
         );
 
+        // Ajustar la gravedad personalizada
+        float yVelocity = rigidbody.linearVelocity.y + Physics.gravity.y * (gravityMultiplier - 1f) * Time.fixedDeltaTime;
+
         // Aplicar movimiento al Rigidbody
-        Vector3 move = transform.rotation * new Vector3(targetVelocity.x, rigidbody.linearVelocity.y, targetVelocity.y);
+        Vector3 move = transform.rotation * new Vector3(targetVelocity.x, yVelocity, targetVelocity.y);
         rigidbody.linearVelocity = move;
     }
 
