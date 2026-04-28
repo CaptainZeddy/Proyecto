@@ -458,6 +458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec72980442fddac4d86e75ab24b4d027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amount: 0.002
+  Frecuencia: 0.5
+  Smooth: 10
   character: {fileID: 4207293392497186}
   sensitivity: 2
   smoothing: 1.5
@@ -627,6 +630,7 @@ MonoBehaviour:
   canRun: 1
   runSpeed: 9
   runningKey: 304
+  rigidbody: {fileID: 0}
 --- !u!114 &114497868231759342
 MonoBehaviour:
   m_ObjectHideFlags: 0
