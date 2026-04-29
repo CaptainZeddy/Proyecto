@@ -4,18 +4,18 @@ public class Health : MonoBehaviour
 {
     public int maxHealth = 100;
     private int currentHealth;
-
     public bool destroyOnDeath = true;
+    private PlayerStats stats;
 
     void Start()
     {
-        currentHealth = maxHealth;
+        stats = GetComponent<PlayerStats>();
+        currentHealth = stats != null ? stats.maxHealth : maxHealth;
     }
 
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-
         if (currentHealth <= 0)
         {
             Die();
@@ -25,7 +25,6 @@ public class Health : MonoBehaviour
     void Die()
     {
         Debug.Log(gameObject.name + " ha muerto");
-
         if (destroyOnDeath)
         {
             Destroy(gameObject);

@@ -3,6 +3,9 @@
 public class PlayerLevel : MonoBehaviour
 {
     private PlayerStats stats;
+    private int currentXP = 0;
+    public int xpToNextLevel = 100;
+
 
     void Awake()
     {
@@ -28,11 +31,22 @@ public class PlayerLevel : MonoBehaviour
 
     public void AddXP(int amount)
     {
-        LevelUp();
+        currentXP += amount;
+        if (currentXP >= xpToNextLevel)
+        {
+            currentXP -= xpToNextLevel;
+            LevelUp();
+        }
     }
 
     void LevelUp()
     {
-        stats.IncreaseStat("strength");
+        if (stats.level < stats.maxLevel)
+        {
+            stats.level++;
+            stats.IncreaseStat("strength");
+            stats.RecalculateStats();
+            Debug.Log("¡Nivel " + stats.level + "!");
+        }
     }
 }

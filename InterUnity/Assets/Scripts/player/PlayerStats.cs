@@ -27,7 +27,7 @@ public class PlayerStats : MonoBehaviour
         maxHealth = 100 + (vitality * 10);
         maxMana = 50 + (mana * 5);
         manaRegen = 0.5f + (mana * 0.5f);
-        attackSpeed = 1f + (level * 0.1f);
+        attackSpeed = 1f + (level * 0.2f);
     }
 
     public int CalculatePhysicalDamage(int baseDamage)

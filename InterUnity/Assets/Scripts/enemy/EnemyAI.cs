@@ -7,7 +7,8 @@ public class EnemyAI : MonoBehaviour
     public float detectionRange = 10f;
     public float attackRange = 2f;
     public int damage = 10;
-
+    public float attackCooldown = 1f;
+    private float lastAttackTime;
     private NavMeshAgent agent;
     private Health playerHealth;
 
@@ -22,18 +23,18 @@ public class EnemyAI : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position);
 
         if (distance <= detectionRange)
-        {
             agent.SetDestination(player.position);
-        }
 
-        if (distance <= attackRange)
+        if (distance <= attackRange && Time.time >= lastAttackTime + attackCooldown)
         {
             Attack();
+            lastAttackTime = Time.time;
         }
     }
 
     void Attack()
     {
-        playerHealth.TakeDamage(damage);
+        if (playerHealth != null)
+            playerHealth.TakeDamage(damage);
     }
 }
