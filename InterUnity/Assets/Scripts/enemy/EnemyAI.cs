@@ -20,6 +20,9 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        // Si el jugador ha sido destruido, el enemigo se detiene
+        if (player == null) return;
+
         float distance = Vector3.Distance(transform.position, player.position);
 
         if (distance <= detectionRange)
