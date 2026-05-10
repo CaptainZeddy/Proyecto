@@ -25,9 +25,10 @@ public class Health : MonoBehaviour
     void Die()
     {
         Debug.Log(gameObject.name + " ha muerto");
+        Animator anim = GetComponent<Animator>();
+        if (anim != null)
+            anim.SetTrigger("death");
         if (destroyOnDeath)
-        {
-            Destroy(gameObject);
-        }
+            Destroy(gameObject, 2f); // espera 2 segundos para que se vea la animación
     }
 }
