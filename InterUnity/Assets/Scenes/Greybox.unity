@@ -339,7 +339,6 @@ GameObject:
   - component: {fileID: 324259450}
   - component: {fileID: 324259449}
   - component: {fileID: 324259448}
-  - component: {fileID: 324259452}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -440,38 +439,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &324259452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324259447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
-  m_SerializedVersion: 0
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: a773298626666d3439ed51e8bd9b0cf1, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!1 &379479821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b921b42b5e50e4998141b76d52b5df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjetoInteractivo
+  chestOpenPrefab: {fileID: 0}
 --- !u!65 &1278237602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1317,6 +1285,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448723808}
   m_CullTransparentMesh: 1
+
 --- !u!1 &1458726240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,7 +1827,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 580213810}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 20437472726391238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9073,7 +9042,6 @@ SceneRoots:
   - {fileID: 379479825}
   - {fileID: 1544200837}
   - {fileID: 1278237605}
-  - {fileID: 2000828847}
   - {fileID: 1458726243}
   - {fileID: 2199628842688866175}
   - {fileID: 3065771178623022565}

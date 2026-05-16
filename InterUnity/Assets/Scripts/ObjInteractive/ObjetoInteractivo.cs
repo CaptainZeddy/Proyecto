@@ -2,19 +2,22 @@ using UnityEngine;
 
 public class ObjetoInteractivo : MonoBehaviour
 {
-    public void activarObjeto()
-    {
-        Destroy(gameObject);
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Tooltip("Prefab del cofre abierto que se instanciará cuando se active el objeto.")]
+    public GameObject chestOpenPrefab;
+
     void Start()
     {
-        
+  
     }
 
-    // Update is called once per frame
-    void Update()
+    public void activarObjeto()
     {
-        
+        if (chestOpenPrefab != null)
+        {
+            Instantiate(chestOpenPrefab, transform.position, transform.rotation);
+            Destroy(gameObject);
+            return;
+        }
+
     }
 }
