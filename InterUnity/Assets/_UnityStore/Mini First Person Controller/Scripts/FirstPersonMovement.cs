@@ -5,6 +5,7 @@ using UnityEngine;
 public class FirstPersonMovement : MonoBehaviour
 {
     public float speed = 2f;
+    Animator animator;
 
     [Header("Gravity")]
     [Tooltip("Multiplicador que ajusta la gravedad aplicada al Rigidbody.")]
@@ -22,7 +23,8 @@ public class FirstPersonMovement : MonoBehaviour
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
-        rigidbody.freezeRotation = true; // Evita que el cuerpo rote al moverse
+        rigidbody.freezeRotation = true;
+        animator = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -47,6 +49,12 @@ public class FirstPersonMovement : MonoBehaviour
         // Aplicar movimiento al Rigidbody
         Vector3 move = transform.rotation * new Vector3(targetVelocity.x, yVelocity, targetVelocity.y);
         rigidbody.linearVelocity = move;
+
+        if (animator != null)
+        {
+            float speed = new Vector2(rigidbody.linearVelocity.x, rigidbody.linearVelocity.z).magnitude;
+            animator.SetFloat("speed", speed);
+        }
     }
 
     // Propiedad pública para Head Bob
