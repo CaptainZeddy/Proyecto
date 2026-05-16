@@ -1,3 +1,5 @@
+using System;
+using MySql.Data.MySqlClient;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -22,10 +24,25 @@ public class PlayerStats : MonoBehaviour
         RecalculateStats();
     }
 
+    public void LoadFromDatabase(MySqlDataReader leerBD)
+    {
+        level = leerBD["level"] != DBNull.Value ? Convert.ToInt32(leerBD["level"]) : level;
+        maxLevel = leerBD["maxLevel"] != DBNull.Value ? Convert.ToInt32(leerBD["maxLevel"]) : maxLevel;
+        strength = leerBD["strength"] != DBNull.Value ? Convert.ToInt32(leerBD["strength"]) : strength;
+        intelligence = leerBD["intelligence"] != DBNull.Value ? Convert.ToInt32(leerBD["intelligence"]) : intelligence;
+        vitality = leerBD["vitality"] != DBNull.Value ? Convert.ToInt32(leerBD["vitality"]) : vitality;
+        mana = leerBD["mana"] != DBNull.Value ? Convert.ToInt32(leerBD["mana"]) : mana;
+        resistance = leerBD["resistance"] != DBNull.Value ? Convert.ToInt32(leerBD["resistance"]) : resistance;
+        attackSpeed = leerBD["attackSpeed"] != DBNull.Value ? Convert.ToSingle(leerBD["attackSpeed"]) : attackSpeed;
+        manaRegen = leerBD["manaRegen"] != DBNull.Value ? Convert.ToSingle(leerBD["manaRegen"]) : manaRegen;
+        maxHealth = leerBD["maxHealth"] != DBNull.Value ? Convert.ToInt32(leerBD["maxHealth"]) : maxHealth;
+        maxMana = leerBD["maxMana"] != DBNull.Value ? Convert.ToInt32(leerBD["maxMana"]) : maxMana;
+    }
+
     public void RecalculateStats()
     {
         maxHealth = 10 + (vitality * 1);
-        maxMana = 50 + (mana * 5);
+        maxMana = 10 + (mana * 1);
         manaRegen = 0.5f + (mana * 0.5f);
         attackSpeed = 1f + (level * 0.2f);
     }
